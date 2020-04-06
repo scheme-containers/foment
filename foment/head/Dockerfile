@@ -8,7 +8,8 @@ RUN git init \
  && git remote add origin https://github.com/leftmike/foment.git \
  && git fetch origin 5488cbd6cabbaeb066d02421ff4b3fc2c19e13ba --depth 1 --tags \
  && git reset --hard FETCH_HEAD
-RUN make -C unix
+WORKDIR /build/foment/unix
+RUN make
 
 FROM debian:buster-slim
 COPY --from=build /build/foment/unix/release/foment /usr/local/bin/
